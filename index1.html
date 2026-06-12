@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ulysses a cappella</title>
+    <!-- Google Fonts からスタイリッシュなフォントを読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0a0f1d;
+            --text-color: #e2e8f0;
+            --accent-color: #c5a880; /* 上品なゴールド */
+            --accent-pink: #ff7ebb; /* 大人可愛いピンクのアクセント */
+            --card-bg: #131b2e;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* 背景の装飾音符 */
+        .bubble-notes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        /* ヘッダー */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 10%;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 言語切替プルダウン */
+        .lang-switcher select {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--accent-color);
+            padding: 5px 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+            border-radius: 4px;
+        }
+        .lang-switcher select option { background-color: var(--bg-color); }
+
+        /* メインビジュアル */
+        .hero {
+            text-align: center;
+            padding: 120px 20px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.8rem;
+            letter-spacing: 6px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(197, 168, 128, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        .hero-icon {
+            margin-top: 20px;
+            animation: bounce 3s infinite ease-in-out;
+        }
+
+        /* コンテンツエリア */
+        .container { max-width: 750px; margin: 0 auto; padding: 0 20px 100px; }
+        section { margin-bottom: 90px; }
+        
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* 特徴リストのデザイン */
+        .feature-box {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .feature-item {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .feature-item:last-child { margin-bottom: 0; }
+
+        .feature-item-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        .feature-item-desc {
+            opacity: 0.85;
+            font-size: 0.95rem;
+        }
+
+        .feature-icon {
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: var(--accent-pink);
+        }
+
+        /* サークル情報テーブル */
+        .info-table {
+            width: 100%;
+            margin-top: 40px;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(197, 168, 128, 0.1);
+        }
+
+        .info-table td { padding: 15px 20px; }
+        .info-table tr { border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .info-table tr:last-child { border-bottom: none; }
+        .info-table-title { color: var(--accent-color); font-weight: bold; width: 25%; }
+
+        /* 応募セクション＆応募ボタン */
+        .join-box {
+            text-align: center;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            border-radius: 16px;
+            padding: 50px 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .join-box p {
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        .apply-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 80%;
+            max-width: 400px;
+            padding: 18px;
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .apply-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(197, 168, 128, 0.4);
+            transform: translateY(-2px);
+        }
+
+        footer { text-align: center; padding: 40px 20px; font-size: 0.8rem; opacity: 0.5; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .lang-en { display: none; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 背景の装飾音符 -->
+    <svg class="bubble-notes" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M10,20 Q13,15 15,20 T20,20" fill="none" stroke="white" stroke-width="0.2"/>
+        <circle cx="10" cy="80" r="1" fill="white"/>
+        <circle cx="85" cy="20" r="1.5" fill="white"/>
+        <circle cx="90" cy="60" r="0.8" fill="white"/>
+    </svg>
+
+    <header>
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            Ulysses
+        </div>
+        <div class="lang-switcher">
+            <select id="langSelect" onchange="switchLanguage()">
+                <option value="ja">日本語</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>Ulysses</h1>
+        <p class="lang-ja">重なり合う声、洗練された響きを求めて。</p>
+        <p class="lang-en">Seeking synchronized voices and sophisticated harmonies.</p>
+        
+        <div class="hero-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <!-- ABOUT（紹介文セクション） -->
+        <section id="about">
+            <h2>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                ABOUT US
+            </h2>
+            
+            <div class="lang-ja">
+                <p>東京・横浜を中心に活動しているアカペラサークル「Ulysses（ユリシーズ）」です！</p>
+                <p>Ulyssesでは主に固定のバンド形式（3〜4人）で活動しており、3ヶ月に1度（年4回）、各バンドが集まってミニライブ（発表会）を行っています。まったりと、でも素敵なハーモニーを追求して楽しんでいます♪</p>
+                
+                <div class="feature-box">
+                    <h3 style="margin-top:0; font-size:1.2rem; color:#fff; letter-spacing:1px; display:flex; align-items:center; gap:8px;">
+                        ⭐︎ Ulyssesの特徴
+                    </h3>
+                    
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                        <div class="feature-item-title">初心者向けのエンジョイサークル！</div>
+                        <div class="feature-item-desc">アカペラ未経験の方でも安心して溶け込める、とっても居心地の良い環境です。</div>
+                    </div>
+
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <div class="feature-item-title">メンバーの希望に沿った活動場所</div>
+                        <div class="feature-item-desc">現在は【新宿・大井町・上野・横浜】が主な活動場所です。</div>
+                    </div>
+
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path></svg>
+                        <div class="feature-item-title">男女幅広い年齢層が在籍</div>
+                        <div class="feature-item-desc">20代から50代まで幅広いメンバーが参加しており、世代を超えて仲良く活動しています。</div>
+                    </div>
+                </div>
+
+                <table class="info-table">
+                    <tr><td class="info-table-title">活動地域</td><td>東京都、神奈川県、千葉県</td></tr>
+                    <tr><td class="info-table-title">活動方針</td><td>まったり（エンジョイ志向）</td></tr>
+                    <tr><td style="opacity: 0.5; font-size: 0.8rem;" colspan="2">最終更新日: 2026年2月23日</td></tr>
+                </table>
+            </div>
+
+            <div class="lang-en">
+                <p>Welcome to the a cappella circle "Ulysses," operating mainly in Tokyo and Yokohama.</p>
+                <div class="feature-box">
+                    <h3 style="margin-top:0; font-size:1.2rem; color:#fff; letter-spacing:1px;">⭐︎ Features of Ulysses</h3>
+                    <div class="feature-item">
+                        <div class="feature-item-title">Beginner-Friendly Environment</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 応募セクション（ボタンだけ！） -->
+        <section id="join">
+            <h2>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+                MEMBER REGISTRATION
+            </h2>
+            
+            <div class="join-box">
+                <div class="lang-ja">
+                    <p>メンバー登録・お問い合わせは、下記のボタンよりGoogleフォームを開いてご記入ください。<br>※送信後はこのタブに戻ってきていただけます。</p>
+                    <!-- target="_blank" を入れることで、今のHPを残したまま新しいタブでフォームを開きます -->
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScTwZ8Q_oXY9HvjV0AUa9nykeMoMIozhNQxTXpaBy0hAem1ww/viewform" target="_blank" class="apply-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                        メンバー応募フォームを開く
+                    </a>
+                </div>
+                
+                <div class="lang-en">
+                    <p>To register, please fill out the Google Form via the link below.</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScTwZ8Q_oXY9HvjV0AUa9nykeMoMIozhNQxTXpaBy0hAem1ww/viewform" target="_blank" class="apply-btn">
+                        Open Google Form
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Ulysses a cappella. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function switchLanguage() {
+            const selectedLang = document.getElementById('langSelect').value;
+            const jaElements = document.querySelectorAll('.lang-ja');
+            const enElements = document.querySelectorAll('.lang-en');
+
+            if (selectedLang === 'ja') {
+                jaElements.forEach(el => el.style.display = 'block');
+                enElements.forEach(el => el.style.display = 'none');
+            } else {
+                jaElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'block');
+            }
+        }
+    </script>
+</body>
+</html>
