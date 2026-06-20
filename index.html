@@ -226,9 +226,11 @@
         .hero-singers {
             display: block;
             width: 100%;
-            max-width: 480px;
+            max-width: 640px;
             margin: 10px auto 0;
             height: auto;
+            -webkit-mask-image: radial-gradient(ellipse 60% 75% at 50% 38%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%);
+            mask-image: radial-gradient(ellipse 60% 75% at 50% 38%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%);
         }
 
         .hero-staff g[fill] circle,
@@ -571,47 +573,8 @@
             <path d="M356,22 Q430,0 506,30" fill="none" stroke="var(--accent-light)" stroke-width="1.4" opacity="0.5" stroke-linecap="round"/>
         </svg>
 
-        <!-- シグネチャービジュアル：歌うグループのシルエット（線画・スタイリッシュ） -->
-        <svg class="hero-singers" viewBox="0 0 600 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <!-- 後方左：マイクを持ち少し上を向く -->
-            <g transform="translate(70,40)" stroke="var(--accent-color-deep)" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.55">
-                <circle cx="30" cy="22" r="16"/>
-                <path d="M8,120 C8,80 14,58 30,58 C46,58 52,80 52,120"/>
-                <path d="M30,58 L30,30"/>
-                <ellipse cx="30" cy="27" rx="3.5" ry="5"/>
-            </g>
-            <!-- 後方右：肩を組むように少し傾く -->
-            <g transform="translate(470,42)" stroke="var(--accent-color-deep)" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.55">
-                <circle cx="32" cy="20" r="16"/>
-                <path d="M10,118 C8,78 16,56 32,56 C48,56 54,80 56,118"/>
-            </g>
-            <!-- 中央左：手を口元のマイク代わりに添えて歌う -->
-            <g transform="translate(160,20)" stroke="var(--accent-color)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="34" cy="24" r="18"/>
-                <path d="M8,138 C8,92 16,68 34,68 C52,68 60,92 60,138"/>
-                <path d="M34,68 L34,38"/>
-                <path d="M20,40 Q34,30 46,42" stroke-width="2"/>
-                <ellipse cx="34" cy="29" rx="3.5" ry="5.5"/>
-            </g>
-            <!-- 中央右：腕を大きく広げてハーモニーを楽しむ -->
-            <g transform="translate(330,18)" stroke="var(--accent-color)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="40" cy="24" r="18"/>
-                <path d="M12,140 C10,94 20,70 40,70 C60,70 68,96 70,140"/>
-                <path d="M40,70 C20,78 6,68 -2,52" stroke-width="2.2"/>
-                <path d="M40,70 C62,76 78,64 86,46" stroke-width="2.2"/>
-                <ellipse cx="40" cy="29" rx="3.8" ry="5.5"/>
-            </g>
-            <!-- 中央：一番前、両手を上げてリードする -->
-            <g transform="translate(248,4)" stroke="var(--accent-color-deep)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="40" cy="26" r="20"/>
-                <path d="M10,150 C8,98 18,72 40,72 C62,72 72,100 74,150"/>
-                <path d="M40,72 C22,62 12,40 14,18" stroke-width="2.4"/>
-                <path d="M40,72 C58,62 68,40 66,18" stroke-width="2.4"/>
-                <ellipse cx="40" cy="31" rx="4" ry="6"/>
-            </g>
-            <!-- 足元の柔らかい接地ライン -->
-            <ellipse cx="300" cy="172" rx="260" ry="6" fill="var(--accent-light)" opacity="0.12"/>
-        </svg>
+        <!-- シグネチャービジュアル：歌うグループのシルエット画像 -->
+        <img class="hero-singers" src="hero-singers.png" alt="マイクを持って歌うUlyssesメンバーのシルエットイラスト">
     </div>
 
     <div class="container">
