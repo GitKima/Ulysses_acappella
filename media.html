@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEDIA（Coming Soon）｜Ulysses（ユリシーズ）｜東京・横浜のアカペラサークル</title>
+
+    <meta name="description" content="Ulysses（ユリシーズ）のメディアページ。ライブ動画やフォトギャラリーを今後公開予定です。東京・横浜で活動するアカペラサークル、初心者歓迎・メンバー募集中。">
+    <meta name="keywords" content="アカペラ,アカペラサークル,東京,横浜,Ulysses,ユリシーズ,動画,ライブ,フォトギャラリー">
+    <link rel="canonical" href="https://ulysses-acappella.example.com/media.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MEDIA（Coming Soon）｜Ulysses（ユリシーズ）">
+    <meta property="og:description" content="ライブ動画やフォトギャラリーを今後公開予定です。東京・横浜のアカペラサークルUlysses。">
+    <meta property="og:url" content="https://ulysses-acappella.example.com/media.html">
+    <meta property="og:locale" content="ja_JP">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #081420;
+            --text-color: #e6edf5;
+            --accent-color: #5fb4ff;
+            --accent-color-deep: #1e6fd9;
+            --accent-white: #ffffff;
+            --card-bg: #0f1e30;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        a { color: inherit; }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 10%;
+            border-bottom: 1px solid rgba(95, 180, 255, 0.2);
+            position: sticky;
+            top: 0;
+            background: rgba(8, 20, 32, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 10;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        nav.main-nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        nav.main-nav a {
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            color: var(--text-color);
+            opacity: 0.85;
+            transition: opacity 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+
+        nav.main-nav a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        nav.main-nav a.active {
+            color: var(--accent-color);
+            opacity: 1;
+        }
+
+        .lang-switcher select {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--accent-color);
+            padding: 5px 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+            border-radius: 4px;
+        }
+        .lang-switcher select option { background-color: var(--bg-color); }
+
+        .lang-en { display: none; }
+
+        /* Coming Soon メインコンテンツ */
+        .coming-soon-wrap {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .coming-soon-inner { max-width: 600px; }
+
+        .note-cluster {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 30px;
+            color: var(--accent-color);
+        }
+
+        .note-cluster svg:nth-child(1) { animation: float 3.2s ease-in-out infinite; }
+        .note-cluster svg:nth-child(2) { animation: float 3.6s ease-in-out infinite 0.4s; opacity: 0.7; }
+        .note-cluster svg:nth-child(3) { animation: float 2.8s ease-in-out infinite 0.8s; opacity: 0.5; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .coming-soon-eyebrow {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .coming-soon-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            letter-spacing: 5px;
+            color: #fff;
+            margin-bottom: 24px;
+            text-shadow: 0 0 24px rgba(95, 180, 255, 0.4);
+        }
+
+        .coming-soon-desc {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            margin-bottom: 40px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(95, 180, 255, 0.4);
+        }
+
+        footer { text-align: center; padding: 40px 20px; font-size: 0.8rem; opacity: 0.5; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+
+        @media (max-width: 600px) {
+            header { padding: 20px 6%; }
+            nav.main-nav { gap: 16px; }
+            .coming-soon-title { font-size: 2.2rem; letter-spacing: 3px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .note-cluster svg { animation: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            Ulysses
+        </a>
+        <nav class="main-nav">
+            <a href="index.html#about" class="lang-ja-nav">ABOUT</a>
+            <a href="index.html#about" class="lang-en-nav" style="display:none;">ABOUT</a>
+            <a href="media.html" class="active lang-ja-nav">MEDIA</a>
+            <a href="media.html" class="active lang-en-nav" style="display:none;">MEDIA</a>
+            <a href="index.html#contact" class="lang-ja-nav">CONTACT</a>
+            <a href="index.html#contact" class="lang-en-nav" style="display:none;">CONTACT</a>
+            <a href="index.html#join" class="lang-ja-nav">JOIN US</a>
+            <a href="index.html#join" class="lang-en-nav" style="display:none;">JOIN US</a>
+        </nav>
+        <div class="lang-switcher">
+            <select id="langSelect" onchange="switchLanguage()">
+                <option value="ja">日本語</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="coming-soon-wrap">
+        <div class="coming-soon-inner">
+            <div class="note-cluster">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            </div>
+
+            <div class="lang-ja">
+                <div class="coming-soon-eyebrow">Media &amp; Gallery</div>
+                <h1 class="coming-soon-title">Coming Soon</h1>
+                <p class="coming-soon-desc">ライブ動画やフォトギャラリーを準備中です。<br>Ulyssesの活動の様子を近日公開予定ですので、お楽しみに！</p>
+                <a href="index.html" class="back-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+                    トップページに戻る
+                </a>
+            </div>
+
+            <div class="lang-en">
+                <div class="coming-soon-eyebrow">Media &amp; Gallery</div>
+                <h1 class="coming-soon-title">Coming Soon</h1>
+                <p class="coming-soon-desc">Live performance videos and a photo gallery are on the way.<br>Stay tuned for a look at Ulysses in action!</p>
+                <a href="index.html" class="back-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Ulysses a cappella. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function switchLanguage() {
+            const selectedLang = document.getElementById('langSelect').value;
+            document.querySelectorAll('.lang-ja').forEach(el => el.style.display = selectedLang === 'ja' ? 'block' : 'none');
+            document.querySelectorAll('.lang-en').forEach(el => el.style.display = selectedLang === 'en' ? 'block' : 'none');
+            document.querySelectorAll('.lang-ja-nav').forEach(el => el.style.display = selectedLang === 'ja' ? 'inline' : 'none');
+            document.querySelectorAll('.lang-en-nav').forEach(el => el.style.display = selectedLang === 'en' ? 'inline' : 'none');
+        }
+    </script>
+</body>
+</html>

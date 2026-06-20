@@ -3,20 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ulysses a cappella</title>
-    <!-- Google Fonts からスタイリッシュなフォントを読み込み -->
+    <title>Ulysses（ユリシーズ）｜東京・横浜のアカペラサークル｜初心者歓迎</title>
+
+    <!-- ===== SEO: meta description / keywords ===== -->
+    <meta name="description" content="Ulysses（ユリシーズ）は東京・横浜を中心に活動するアカペラサークルです。初心者歓迎・20代から60代まで幅広い年齢層が在籍し、3〜4人のバンド形式でまったりとハーモニーを追求しています。新宿・大井町・上野・横浜で活動中。メンバー募集中！">
+    <meta name="keywords" content="アカペラ,アカペラサークル,東京,横浜,新宿,大井町,上野,初心者,メンバー募集,Ulysses,ユリシーズ,社会人サークル,音楽サークル">
+    <meta name="author" content="Ulysses a cappella">
+    <link rel="canonical" href="https://ulysses-acappella.example.com/">
+
+    <!-- ===== SEO: Open Graph / Twitter Card ===== -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ulysses（ユリシーズ）｜東京・横浜のアカペラサークル">
+    <meta property="og:description" content="東京・横浜を中心に活動するアカペラサークル。初心者歓迎、20代から60代まで幅広いメンバーが在籍。メンバー募集中！">
+    <meta property="og:url" content="https://ulysses-acappella.example.com/">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:site_name" content="Ulysses a cappella">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Ulysses（ユリシーズ）｜東京・横浜のアカペラサークル">
+    <meta name="twitter:description" content="初心者歓迎・20代から60代まで幅広い年齢層が活動中。東京・横浜のアカペラサークルUlysses。">
+
+    <!-- ===== SEO: 構造化データ（JSON-LD） ===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicGroup",
+      "name": "Ulysses a cappella",
+      "alternateName": "ユリシーズ",
+      "description": "東京・横浜を中心に活動するアカペラサークル。初心者歓迎、20代から60代まで幅広い年齢層が在籍。",
+      "genre": "A cappella",
+      "areaServed": ["東京都", "神奈川県", "千葉県"],
+      "url": "https://ulysses-acappella.example.com/",
+      "foundingLocation": "東京都"
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
-            --bg-color: #0a0f1d;
-            --text-color: #e2e8f0;
-            --accent-color: #c5a880; /* 上品なゴールド */
-            --accent-pink: #ff7ebb; /* 大人可愛いピンクのアクセント */
-            --card-bg: #131b2e;
+            --bg-color: #081420;        /* 深い紺 */
+            --text-color: #e6edf5;
+            --accent-color: #5fb4ff;    /* スカイブルー（メインアクセント） */
+            --accent-color-deep: #1e6fd9; /* 深めの青（ホバー等） */
+            --accent-white: #ffffff;
+            --card-bg: #0f1e30;
         }
+
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -28,6 +63,8 @@
             overflow-x: hidden;
         }
 
+        a { color: inherit; }
+
         /* 背景の装飾音符 */
         .bubble-notes {
             position: fixed;
@@ -37,7 +74,7 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.15;
+            opacity: 0.12;
         }
 
         /* ヘッダー */
@@ -46,7 +83,14 @@
             justify-content: space-between;
             align-items: center;
             padding: 30px 10%;
-            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+            border-bottom: 1px solid rgba(95, 180, 255, 0.2);
+            position: sticky;
+            top: 0;
+            background: rgba(8, 20, 32, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 10;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo {
@@ -57,6 +101,29 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
+        }
+
+        nav.main-nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        nav.main-nav a {
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            color: var(--text-color);
+            opacity: 0.85;
+            transition: opacity 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+
+        nav.main-nav a:hover {
+            opacity: 1;
+            color: var(--accent-color);
         }
 
         /* 言語切替プルダウン */
@@ -86,24 +153,25 @@
             margin-bottom: 20px;
             font-weight: 600;
             color: #fff;
-            text-shadow: 0 0 20px rgba(197, 168, 128, 0.3);
+            text-shadow: 0 0 24px rgba(95, 180, 255, 0.45);
         }
 
         .hero p {
             font-size: 1.1rem;
             letter-spacing: 2px;
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         .hero-icon {
             margin-top: 20px;
             animation: bounce 3s infinite ease-in-out;
+            color: var(--accent-color);
         }
 
         /* コンテンツエリア */
         .container { max-width: 750px; margin: 0 auto; padding: 0 20px 100px; }
         section { margin-bottom: 90px; }
-        
+
         h2 {
             font-family: 'Cinzel', serif;
             font-size: 2rem;
@@ -123,7 +191,7 @@
             padding: 30px;
             margin-top: 30px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .feature-item {
@@ -150,7 +218,7 @@
             position: absolute;
             left: 0;
             top: 4px;
-            color: var(--accent-pink);
+            color: var(--accent-white);
         }
 
         /* サークル情報テーブル */
@@ -162,7 +230,7 @@
             background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(197, 168, 128, 0.1);
+            border: 1px solid rgba(95, 180, 255, 0.12);
         }
 
         .info-table td { padding: 15px 20px; }
@@ -170,11 +238,90 @@
         .info-table tr:last-child { border-bottom: none; }
         .info-table-title { color: var(--accent-color); font-weight: bold; width: 25%; }
 
+        /* Contact / 代表セクション */
+        .contact-box {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid rgba(95, 180, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            display: flex;
+            gap: 35px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-photo {
+            flex-shrink: 0;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 25px rgba(95, 180, 255, 0.3);
+        }
+
+        .contact-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .contact-info { flex: 1; min-width: 220px; }
+
+        .contact-role {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .contact-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+
+        .contact-desc {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-bottom: 18px;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: 1px solid var(--accent-color);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: all 0.25s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+        }
+
         /* 応募セクション＆応募ボタン */
         .join-box {
             text-align: center;
             background-color: var(--card-bg);
-            border: 1px solid rgba(197, 168, 128, 0.2);
+            border: 1px solid rgba(95, 180, 255, 0.2);
             border-radius: 16px;
             padding: 50px 40px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
@@ -208,7 +355,7 @@
         .apply-btn:hover {
             background-color: var(--accent-color);
             color: var(--bg-color);
-            box-shadow: 0 0 20px rgba(197, 168, 128, 0.4);
+            box-shadow: 0 0 20px rgba(95, 180, 255, 0.45);
             transform: translateY(-2px);
         }
 
@@ -219,12 +366,24 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
+
+        @media (max-width: 600px) {
+            header { padding: 20px 6%; }
+            nav.main-nav { gap: 16px; }
+            .hero h1 { font-size: 2.6rem; letter-spacing: 4px; }
+            .contact-box { flex-direction: column; text-align: center; }
+            .contact-links { justify-content: center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-icon { animation: none; }
+        }
     </style>
 </head>
 <body>
 
     <!-- 背景の装飾音符 -->
-    <svg class="bubble-notes" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <svg class="bubble-notes" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
         <path d="M10,20 Q13,15 15,20 T20,20" fill="none" stroke="white" stroke-width="0.2"/>
         <circle cx="10" cy="80" r="1" fill="white"/>
         <circle cx="85" cy="20" r="1.5" fill="white"/>
@@ -232,10 +391,20 @@
     </svg>
 
     <header>
-        <div class="logo">
+        <a href="index.html" class="logo">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
             Ulysses
-        </div>
+        </a>
+        <nav class="main-nav">
+            <a href="#about" class="lang-ja">ABOUT</a>
+            <a href="#about" class="lang-en">ABOUT</a>
+            <a href="media.html" class="lang-ja">MEDIA</a>
+            <a href="media.html" class="lang-en">MEDIA</a>
+            <a href="#contact" class="lang-ja">CONTACT</a>
+            <a href="#contact" class="lang-en">CONTACT</a>
+            <a href="#join" class="lang-ja">JOIN US</a>
+            <a href="#join" class="lang-en">JOIN US</a>
+        </nav>
         <div class="lang-switcher">
             <select id="langSelect" onchange="switchLanguage()">
                 <option value="ja">日本語</option>
@@ -248,30 +417,30 @@
         <h1>Ulysses</h1>
         <p class="lang-ja">重なり合う声、洗練された響きを求めて。</p>
         <p class="lang-en">Seeking synchronized voices and sophisticated harmonies.</p>
-        
+
         <div class="hero-icon">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
         </div>
     </div>
 
     <div class="container">
-        
+
         <!-- ABOUT（紹介文セクション） -->
         <section id="about">
             <h2>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 ABOUT US
             </h2>
-            
+
             <div class="lang-ja">
                 <p>東京・横浜を中心に活動しているアカペラサークル「Ulysses（ユリシーズ）」です！</p>
                 <p>Ulyssesでは主に固定のバンド形式（3〜4人）で活動しており、3ヶ月に1度（年4回）、各バンドが集まってミニライブ（発表会）を行っています。まったりと、でも素敵なハーモニーを追求して楽しんでいます♪</p>
-                
+
                 <div class="feature-box">
                     <h3 style="margin-top:0; font-size:1.2rem; color:#fff; letter-spacing:1px; display:flex; align-items:center; gap:8px;">
                         ⭐︎ Ulyssesの特徴
                     </h3>
-                    
+
                     <div class="feature-item">
                         <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
                         <div class="feature-item-title">初心者向けのエンジョイサークル！</div>
@@ -287,7 +456,7 @@
                     <div class="feature-item">
                         <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path></svg>
                         <div class="feature-item-title">男女幅広い年齢層が在籍</div>
-                        <div class="feature-item-desc">20代から50代まで幅広いメンバーが参加しており、世代を超えて仲良く活動しています。</div>
+                        <div class="feature-item-desc">20代から60代まで幅広いメンバーが参加しており、年齢を問わず世代を超えて仲良く活動しています。</div>
                     </div>
                 </div>
 
@@ -300,10 +469,69 @@
 
             <div class="lang-en">
                 <p>Welcome to the a cappella circle "Ulysses," operating mainly in Tokyo and Yokohama.</p>
+                <p>Ulysses mainly operates in fixed band formats (3-4 people), and once every three months (4 times a year), each band gathers for a mini live performance. We enjoy pursuing beautiful harmonies in a relaxed atmosphere.</p>
                 <div class="feature-box">
                     <h3 style="margin-top:0; font-size:1.2rem; color:#fff; letter-spacing:1px;">⭐︎ Features of Ulysses</h3>
                     <div class="feature-item">
                         <div class="feature-item-title">Beginner-Friendly Environment</div>
+                        <div class="feature-item-desc">A comfortable space where even complete beginners can feel right at home.</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-item-title">Activity Locations Based on Member Preference</div>
+                        <div class="feature-item-desc">Currently active mainly in Shinjuku, Oimachi, Ueno, and Yokohama.</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-item-title">Members of All Genders and a Wide Age Range</div>
+                        <div class="feature-item-desc">Members in their 20s to 60s participate together, enjoying activities across generations regardless of age.</div>
+                    </div>
+                </div>
+                <table class="info-table">
+                    <tr><td class="info-table-title">Area</td><td>Tokyo, Kanagawa, Chiba</td></tr>
+                    <tr><td class="info-table-title">Style</td><td>Relaxed / Enjoyment-focused</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- CONTACT（代表者紹介） -->
+        <section id="contact">
+            <h2>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                CONTACT
+            </h2>
+
+            <div class="lang-ja">
+                <div class="contact-box">
+                    <div class="contact-photo">
+                        <img src="ren-profile.png" alt="Ulysses代表 RENさんのプロフィール写真">
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-role">代表</div>
+                        <div class="contact-name">REN</div>
+                        <div class="contact-desc">サークルに関するご質問・お問い合わせはお気軽にどうぞ。見学も大歓迎です！</div>
+                        <div class="contact-links">
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLScTwZ8Q_oXY9HvjV0AUa9nykeMoMIozhNQxTXpaBy0hAem1ww/viewform" target="_blank" class="contact-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                フォームで問い合わせる
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lang-en">
+                <div class="contact-box">
+                    <div class="contact-photo">
+                        <img src="ren-profile.png" alt="Profile photo of REN, the leader of Ulysses">
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-role">Leader</div>
+                        <div class="contact-name">REN</div>
+                        <div class="contact-desc">Feel free to reach out with any questions about the circle. Visitors are always welcome!</div>
+                        <div class="contact-links">
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLScTwZ8Q_oXY9HvjV0AUa9nykeMoMIozhNQxTXpaBy0hAem1ww/viewform" target="_blank" class="contact-link">
+                                Contact via Form
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -315,7 +543,7 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
                 MEMBER REGISTRATION
             </h2>
-            
+
             <div class="join-box">
                 <div class="lang-ja">
                     <p>メンバー登録・お問い合わせは、下記のボタンよりGoogleフォームを開いてご記入ください。<br>※送信後はこのタブに戻ってきていただけます。</p>
@@ -325,7 +553,7 @@
                         メンバー応募フォームを開く
                     </a>
                 </div>
-                
+
                 <div class="lang-en">
                     <p>To register, please fill out the Google Form via the link below.</p>
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLScTwZ8Q_oXY9HvjV0AUa9nykeMoMIozhNQxTXpaBy0hAem1ww/viewform" target="_blank" class="apply-btn">
@@ -354,7 +582,21 @@
                 jaElements.forEach(el => el.style.display = 'none');
                 enElements.forEach(el => el.style.display = 'block');
             }
+
+            // ナビのリンクラベルはinline表示の方が自然なので個別対応
+            document.querySelectorAll('nav.main-nav .lang-ja').forEach(el => {
+                el.style.display = selectedLang === 'ja' ? 'inline' : 'none';
+            });
+            document.querySelectorAll('nav.main-nav .lang-en').forEach(el => {
+                el.style.display = selectedLang === 'en' ? 'inline' : 'none';
+            });
         }
+
+        // 初期化（ナビのリンクはblockではなくinlineにしたいため）
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('nav.main-nav .lang-ja').forEach(el => el.style.display = 'inline');
+            document.querySelectorAll('nav.main-nav .lang-en').forEach(el => el.style.display = 'none');
+        });
     </script>
 </body>
 </html>
