@@ -39,21 +39,23 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Dancing+Script:wght@600;700&family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-color: #f5f9ff;          /* ほぼ白、わずかに青み */
             --bg-color-deep: #ffffff;
             --text-color: #14253f;        /* ダークネイビー */
-            --accent-color: #1c5fc4;      /* メインブルー */
+            --accent-color: #1c5fc4;      /* メインブルー（カード等の装飾） */
             --accent-color-deep: #0d3d8a; /* 深いブルー（ホバー等） */
             --accent-light: #6fa8f5;      /* ライトブルー */
             --accent-glow: #9fc6ff;       /* グロー用の淡い青 */
             --accent-white: #ffffff;
             --card-bg: #ffffff;
             --card-border: rgba(28, 95, 196, 0.14);
-            --staff-line: rgba(28, 95, 196, 0.08);
+            --brand-blue: #17a3eb;        /* タイトル・見出し用のブランドブルー */
+            --brand-blue-light: #5fc4f5;
+            --brand-blue-deep: #0d85c9;
         }
 
         * { box-sizing: border-box; }
@@ -69,57 +71,6 @@
         }
 
         a { color: inherit; }
-
-        /* 五線譜風の背景装飾（ページ全体に薄く敷く） */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            pointer-events: none;
-            background-image:
-                repeating-linear-gradient(
-                    to bottom,
-                    transparent 0,
-                    transparent 119px,
-                    var(--staff-line) 119px,
-                    var(--staff-line) 120px,
-                    transparent 120px,
-                    transparent 129px,
-                    var(--staff-line) 129px,
-                    var(--staff-line) 130px,
-                    transparent 130px,
-                    transparent 139px,
-                    var(--staff-line) 139px,
-                    var(--staff-line) 140px,
-                    transparent 140px,
-                    transparent 149px,
-                    var(--staff-line) 149px,
-                    var(--staff-line) 150px,
-                    transparent 150px,
-                    transparent 159px,
-                    var(--staff-line) 159px,
-                    var(--staff-line) 160px,
-                    transparent 160px,
-                    transparent 640px
-                );
-        }
-
-        /* 背景の装飾音符 */
-        .bubble-notes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.5;
-            color: var(--accent-light);
-        }
 
         /* ヘッダー */
         header {
@@ -142,7 +93,7 @@
             font-family: 'Cinzel', serif;
             font-size: 1.8rem;
             letter-spacing: 3px;
-            background: linear-gradient(120deg, var(--accent-color-deep), var(--accent-color) 60%, var(--accent-light));
+            background: linear-gradient(120deg, var(--brand-blue-deep), var(--brand-blue) 60%, var(--brand-blue-light));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -152,7 +103,7 @@
             text-decoration: none;
         }
 
-        .logo svg { color: var(--accent-color); }
+        .logo svg { color: var(--brand-blue); }
 
         nav.main-nav {
             display: flex;
@@ -192,65 +143,46 @@
         /* メインビジュアル */
         .hero {
             text-align: center;
-            padding: 110px 20px 40px;
+            padding: 64px 20px 64px;
             position: relative;
-        }
-
-        .hero h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 3.8rem;
-            letter-spacing: 6px;
-            margin-bottom: 20px;
-            font-weight: 600;
-            background: linear-gradient(120deg, var(--accent-color-deep), var(--accent-color) 50%, var(--accent-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 4px 30px rgba(28, 95, 196, 0.18);
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            opacity: 0.85;
-        }
-
-        .hero-staff {
-            display: block;
-            width: 100%;
-            max-width: 560px;
-            margin: 36px auto 0;
-            height: auto;
         }
 
         .hero-singers {
             display: block;
             width: 100%;
             max-width: 640px;
-            margin: 10px auto 0;
+            margin: 0 auto;
             height: auto;
             -webkit-mask-image: radial-gradient(ellipse 60% 75% at 50% 38%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%);
             mask-image: radial-gradient(ellipse 60% 75% at 50% 38%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%);
         }
 
-        .hero-staff g[fill] circle,
-        .hero-staff g[fill] line {
-            animation: notePulse 3.6s ease-in-out infinite;
+        .hero-tagline {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.3rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin: 4px 0 0;
+            background: linear-gradient(120deg, var(--brand-blue-deep), var(--brand-blue) 50%, var(--brand-blue-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 4px 24px rgba(23, 163, 235, 0.18);
         }
-        .hero-staff g[fill]:nth-of-type(2) circle,
-        .hero-staff g[fill]:nth-of-type(2) line { animation-delay: 0.3s; }
-        .hero-staff g[fill]:nth-of-type(3) circle,
-        .hero-staff g[fill]:nth-of-type(3) line { animation-delay: 0.6s; }
-        .hero-staff g[fill]:nth-of-type(4) circle,
-        .hero-staff g[fill]:nth-of-type(4) line { animation-delay: 0.9s; }
-        .hero-staff g[fill]:nth-of-type(5) circle,
-        .hero-staff g[fill]:nth-of-type(5) line { animation-delay: 1.2s; }
-        .hero-staff g[fill]:nth-of-type(6) circle,
-        .hero-staff g[fill]:nth-of-type(6) line { animation-delay: 1.5s; }
 
-        @keyframes notePulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.55; }
+        .hero-tagline::before,
+        .hero-tagline::after {
+            content: "";
+            display: inline-block;
+            width: 36px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--brand-blue));
+            vertical-align: middle;
+            margin: 0 14px;
+        }
+
+        .hero-tagline::after {
+            background: linear-gradient(90deg, var(--brand-blue), transparent);
         }
 
         /* コンテンツエリア */
@@ -260,7 +192,7 @@
         h2 {
             font-family: 'Cinzel', serif;
             font-size: 2rem;
-            color: var(--accent-color-deep);
+            color: var(--brand-blue-deep);
             border-bottom: 2px solid var(--card-border);
             padding-bottom: 10px;
             margin-bottom: 40px;
@@ -278,7 +210,7 @@
             bottom: -2px;
             width: 64px;
             height: 2px;
-            background: var(--accent-color);
+            background: var(--brand-blue);
         }
 
         /* 特徴リストのデザイン */
@@ -461,49 +393,16 @@
         @media (max-width: 600px) {
             header { padding: 20px 6%; }
             nav.main-nav { gap: 16px; }
-            .hero { padding: 90px 16px 24px; }
-            .hero h1 { font-size: 2.6rem; letter-spacing: 4px; }
+            .hero { padding: 56px 16px 24px; }
             .hero-singers { max-width: 320px; }
+            .hero-tagline { font-size: 1.5rem; letter-spacing: 0.5px; }
+            .hero-tagline::before,
+            .hero-tagline::after { width: 20px; margin: 0 8px; }
             .contact-box { flex-direction: column; text-align: center; padding: 32px 24px; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .hero-staff g[fill] circle,
-            .hero-staff g[fill] line {
-                animation: none;
-            }
         }
     </style>
 </head>
 <body>
-
-    <!-- 背景の装飾：五線譜と音符 -->
-    <svg class="bubble-notes" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <!-- 右上の小さな五線譜とト音記号風カーブ -->
-        <g transform="translate(78,6) scale(0.9)" opacity="0.55">
-            <line x1="0" y1="0" x2="20" y2="0" stroke="currentColor" stroke-width="0.25"/>
-            <line x1="0" y1="1.6" x2="20" y2="1.6" stroke="currentColor" stroke-width="0.25"/>
-            <line x1="0" y1="3.2" x2="20" y2="3.2" stroke="currentColor" stroke-width="0.25"/>
-            <line x1="0" y1="4.8" x2="20" y2="4.8" stroke="currentColor" stroke-width="0.25"/>
-            <line x1="0" y1="6.4" x2="20" y2="6.4" stroke="currentColor" stroke-width="0.25"/>
-            <circle cx="6" cy="4.8" r="1" fill="currentColor"/>
-            <line x1="6.9" y1="4.8" x2="6.9" y2="0.5" stroke="currentColor" stroke-width="0.25"/>
-            <circle cx="12" cy="1.6" r="1" fill="currentColor"/>
-            <line x1="12.9" y1="1.6" x2="12.9" y2="-2.7" stroke="currentColor" stroke-width="0.25"/>
-        </g>
-        <!-- 左下の音符クラスター -->
-        <g transform="translate(5,72)" opacity="0.5">
-            <circle cx="0" cy="8" r="1.3" fill="currentColor"/>
-            <line x1="1.2" y1="8" x2="1.2" y2="0" stroke="currentColor" stroke-width="0.3"/>
-            <circle cx="6" cy="10" r="1" fill="currentColor"/>
-            <line x1="6.9" y1="10" x2="6.9" y2="3" stroke="currentColor" stroke-width="0.25"/>
-            <path d="M1.2,0 Q4,-0.5 6.9,3" fill="none" stroke="currentColor" stroke-width="0.25"/>
-        </g>
-        <!-- 散らばる小さな音符 -->
-        <circle cx="90" cy="55" r="0.8" fill="currentColor" opacity="0.4"/>
-        <circle cx="93" cy="30" r="0.6" fill="currentColor" opacity="0.35"/>
-        <circle cx="3" cy="35" r="0.7" fill="currentColor" opacity="0.4"/>
-    </svg>
 
     <header>
         <a href="index.html" class="logo">
@@ -527,54 +426,9 @@
     </header>
 
     <div class="hero">
-        <h1>Ulysses</h1>
-        <p class="lang-ja">重なり合う声、洗練された響きを求めて。</p>
-        <p class="lang-en">Seeking synchronized voices and sophisticated harmonies.</p>
-
-        <!-- シグネチャービジュアル：五線譜の上で声部が重なり合い、ハーモニーになる -->
-        <svg class="hero-staff" viewBox="0 0 600 110" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <!-- 五線譜 -->
-            <g stroke="var(--accent-light)" stroke-width="1.4" opacity="0.55">
-                <line x1="20" y1="20" x2="580" y2="20"/>
-                <line x1="20" y1="35" x2="580" y2="35"/>
-                <line x1="20" y1="50" x2="580" y2="50"/>
-                <line x1="20" y1="65" x2="580" y2="65"/>
-                <line x1="20" y1="80" x2="580" y2="80"/>
-            </g>
-            <!-- ト音記号風シンプルマーク -->
-            <path d="M48,80 C30,80 30,55 48,52 C64,49 64,28 48,25 C36,22 34,38 44,40" fill="none" stroke="var(--accent-color-deep)" stroke-width="2.6" stroke-linecap="round"/>
-            <!-- 重なり合う音符（ハーモニーを象徴：複数の声部が異なる高さで連なる） -->
-            <g fill="var(--accent-color)">
-                <circle cx="140" cy="65" r="6"/>
-                <line x1="145.5" y1="62" x2="145.5" y2="28" stroke="var(--accent-color)" stroke-width="2.2"/>
-            </g>
-            <g fill="var(--accent-color-deep)">
-                <circle cx="210" cy="50" r="6"/>
-                <line x1="215.5" y1="47" x2="215.5" y2="14" stroke="var(--accent-color-deep)" stroke-width="2.2"/>
-            </g>
-            <g fill="var(--accent-light)">
-                <circle cx="280" cy="35" r="6"/>
-                <line x1="285.5" y1="32" x2="285.5" y2="58" stroke="var(--accent-light)" stroke-width="2.2"/>
-            </g>
-            <g fill="var(--accent-color)">
-                <circle cx="350" cy="58" r="6"/>
-                <line x1="355.5" y1="55" x2="355.5" y2="22" stroke="var(--accent-color)" stroke-width="2.2"/>
-            </g>
-            <!-- 声部をつなぐスラー（重なり合う声を表現） -->
-            <path d="M146,28 Q210,5 285,32" fill="none" stroke="var(--accent-color-deep)" stroke-width="1.4" opacity="0.5" stroke-linecap="round"/>
-            <g fill="var(--accent-color-deep)">
-                <circle cx="430" cy="42" r="6"/>
-                <line x1="435.5" y1="39" x2="435.5" y2="16" stroke="var(--accent-color-deep)" stroke-width="2.2"/>
-            </g>
-            <g fill="var(--accent-color)">
-                <circle cx="500" cy="65" r="6"/>
-                <line x1="505.5" y1="62" x2="505.5" y2="30" stroke="var(--accent-color)" stroke-width="2.2"/>
-            </g>
-            <path d="M356,22 Q430,0 506,30" fill="none" stroke="var(--accent-light)" stroke-width="1.4" opacity="0.5" stroke-linecap="round"/>
-        </svg>
-
         <!-- シグネチャービジュアル：歌うグループのシルエット画像 -->
         <img class="hero-singers" src="hero-singers.png" alt="マイクを持って歌うUlyssesメンバーのシルエットイラスト">
+        <p class="hero-tagline">Where voices become music</p>
     </div>
 
     <div class="container">
@@ -582,7 +436,7 @@
         <!-- ABOUT（紹介文セクション） -->
         <section id="about">
             <h2>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-blue)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 ABOUT US
             </h2>
 
@@ -649,7 +503,7 @@
         <!-- CONTACT（代表者紹介＋メンバー登録） -->
         <section id="contact">
             <h2>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-blue)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                 CONTACT
             </h2>
 

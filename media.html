@@ -17,7 +17,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Dancing+Script:wght@600;700&family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -30,6 +30,9 @@
             --card-bg: #ffffff;
             --card-border: rgba(28, 95, 196, 0.14);
             --staff-line: rgba(28, 95, 196, 0.08);
+            --brand-blue: #17a3eb;
+            --brand-blue-light: #5fc4f5;
+            --brand-blue-deep: #0d85c9;
         }
 
         * { box-sizing: border-box; }
@@ -105,7 +108,7 @@
             font-family: 'Cinzel', serif;
             font-size: 1.8rem;
             letter-spacing: 3px;
-            background: linear-gradient(120deg, var(--accent-color-deep), var(--accent-color) 60%, var(--accent-light));
+            background: linear-gradient(120deg, var(--brand-blue-deep), var(--brand-blue) 60%, var(--brand-blue-light));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -115,7 +118,7 @@
             text-decoration: none;
         }
 
-        .logo svg { color: var(--accent-color); }
+        .logo svg { color: var(--brand-blue); }
 
         nav.main-nav {
             display: flex;
@@ -140,7 +143,7 @@
         }
 
         nav.main-nav a.active {
-            color: var(--accent-color-deep);
+            color: var(--brand-blue-deep);
             opacity: 1;
             font-weight: 700;
         }
@@ -199,21 +202,22 @@
         .coming-soon-eyebrow {
             font-size: 0.85rem;
             letter-spacing: 3px;
-            color: var(--accent-color);
+            color: var(--brand-blue-deep);
             text-transform: uppercase;
             margin-bottom: 12px;
         }
 
         .coming-soon-title {
-            font-family: 'Cinzel', serif;
-            font-size: 3rem;
-            letter-spacing: 5px;
-            background: linear-gradient(120deg, var(--accent-color-deep), var(--accent-color) 50%, var(--accent-light));
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(120deg, var(--brand-blue-deep), var(--brand-blue) 50%, var(--brand-blue-light));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             margin-bottom: 24px;
-            text-shadow: 0 4px 30px rgba(28, 95, 196, 0.18);
+            text-shadow: 0 4px 30px rgba(23, 163, 235, 0.18);
         }
 
         .coming-soon-desc {
