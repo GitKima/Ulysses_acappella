@@ -21,12 +21,15 @@
 
     <style>
         :root {
-            --bg-color: #081420;
-            --text-color: #e6edf5;
-            --accent-color: #5fb4ff;
-            --accent-color-deep: #1e6fd9;
+            --bg-color: #f5f9ff;
+            --text-color: #14253f;
+            --accent-color: #1c5fc4;
+            --accent-color-deep: #0d3d8a;
+            --accent-light: #6fa8f5;
             --accent-white: #ffffff;
-            --card-bg: #0f1e30;
+            --card-bg: #ffffff;
+            --card-border: rgba(28, 95, 196, 0.14);
+            --staff-line: rgba(28, 95, 196, 0.08);
         }
 
         * { box-sizing: border-box; }
@@ -44,15 +47,53 @@
 
         a { color: inherit; }
 
+        /* 五線譜風の背景装飾（ページ全体に薄く敷く） */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            background-image:
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent 0,
+                    transparent 119px,
+                    var(--staff-line) 119px,
+                    var(--staff-line) 120px,
+                    transparent 120px,
+                    transparent 129px,
+                    var(--staff-line) 129px,
+                    var(--staff-line) 130px,
+                    transparent 130px,
+                    transparent 139px,
+                    var(--staff-line) 139px,
+                    var(--staff-line) 140px,
+                    transparent 140px,
+                    transparent 149px,
+                    var(--staff-line) 149px,
+                    var(--staff-line) 150px,
+                    transparent 150px,
+                    transparent 159px,
+                    var(--staff-line) 159px,
+                    var(--staff-line) 160px,
+                    transparent 160px,
+                    transparent 640px
+                );
+        }
+
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 30px 10%;
-            border-bottom: 1px solid rgba(95, 180, 255, 0.2);
+            border-bottom: 1px solid var(--card-border);
             position: sticky;
             top: 0;
-            background: rgba(8, 20, 32, 0.85);
+            background: rgba(245, 249, 255, 0.88);
             backdrop-filter: blur(8px);
             z-index: 10;
             flex-wrap: wrap;
@@ -93,8 +134,9 @@
         }
 
         nav.main-nav a.active {
-            color: var(--accent-color);
+            color: var(--accent-color-deep);
             opacity: 1;
+            font-weight: 700;
         }
 
         .lang-switcher select {
@@ -121,23 +163,31 @@
             text-align: center;
         }
 
-        .coming-soon-inner { max-width: 600px; }
+        .coming-soon-inner { max-width: 620px; }
 
-        .note-cluster {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            margin-bottom: 30px;
-            color: var(--accent-color);
+        /* シグネチャービジュアル：五線譜上に浮かぶ音符たち */
+        .note-staff {
+            display: block;
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto 30px;
+            height: auto;
         }
 
-        .note-cluster svg:nth-child(1) { animation: float 3.2s ease-in-out infinite; }
-        .note-cluster svg:nth-child(2) { animation: float 3.6s ease-in-out infinite 0.4s; opacity: 0.7; }
-        .note-cluster svg:nth-child(3) { animation: float 2.8s ease-in-out infinite 0.8s; opacity: 0.5; }
+        .note-staff .note circle,
+        .note-staff .note line {
+            animation: notePulse 3.6s ease-in-out infinite;
+        }
+        .note-staff .note:nth-of-type(2) circle,
+        .note-staff .note:nth-of-type(2) line { animation-delay: 0.3s; }
+        .note-staff .note:nth-of-type(3) circle,
+        .note-staff .note:nth-of-type(3) line { animation-delay: 0.6s; }
+        .note-staff .note:nth-of-type(4) circle,
+        .note-staff .note:nth-of-type(4) line { animation-delay: 0.9s; }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+        @keyframes notePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         .coming-soon-eyebrow {
@@ -152,9 +202,9 @@
             font-family: 'Cinzel', serif;
             font-size: 3rem;
             letter-spacing: 5px;
-            color: #fff;
+            color: var(--accent-color-deep);
             margin-bottom: 24px;
-            text-shadow: 0 0 24px rgba(95, 180, 255, 0.4);
+            text-shadow: 0 4px 20px rgba(28, 95, 196, 0.15);
         }
 
         .coming-soon-desc {
@@ -179,11 +229,11 @@
 
         .back-link:hover {
             background-color: var(--accent-color);
-            color: var(--bg-color);
-            box-shadow: 0 0 20px rgba(95, 180, 255, 0.4);
+            color: var(--accent-white);
+            box-shadow: 0 8px 24px rgba(28, 95, 196, 0.25);
         }
 
-        footer { text-align: center; padding: 40px 20px; font-size: 0.8rem; opacity: 0.5; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        footer { text-align: center; padding: 40px 20px; font-size: 0.8rem; opacity: 0.6; border-top: 1px solid var(--card-border); }
 
         @media (max-width: 600px) {
             header { padding: 20px 6%; }
@@ -192,7 +242,10 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .note-cluster svg { animation: none; }
+            .note-staff .note circle,
+            .note-staff .note line {
+                animation: none;
+            }
         }
     </style>
 </head>
@@ -223,11 +276,34 @@
 
     <div class="coming-soon-wrap">
         <div class="coming-soon-inner">
-            <div class="note-cluster">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-            </div>
+
+            <!-- シグネチャービジュアル：五線譜と浮かぶ音符 -->
+            <svg class="note-staff" viewBox="0 0 300 90" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                <g stroke="var(--accent-light)" stroke-width="1.2" opacity="0.5">
+                    <line x1="10" y1="20" x2="290" y2="20"/>
+                    <line x1="10" y1="32" x2="290" y2="32"/>
+                    <line x1="10" y1="44" x2="290" y2="44"/>
+                    <line x1="10" y1="56" x2="290" y2="56"/>
+                    <line x1="10" y1="68" x2="290" y2="68"/>
+                </g>
+                <path d="M30,68 C16,68 16,48 30,46 C42,44 42,26 30,24 C20,22 18,34 26,36" fill="none" stroke="var(--accent-color-deep)" stroke-width="2.2" stroke-linecap="round"/>
+                <g class="note" fill="var(--accent-color)">
+                    <circle cx="110" cy="56" r="5"/>
+                    <line x1="114.5" y1="53" x2="114.5" y2="24" stroke="var(--accent-color)" stroke-width="1.8"/>
+                </g>
+                <g class="note" fill="var(--accent-color-deep)">
+                    <circle cx="165" cy="44" r="5"/>
+                    <line x1="169.5" y1="41" x2="169.5" y2="12" stroke="var(--accent-color-deep)" stroke-width="1.8"/>
+                </g>
+                <g class="note" fill="var(--accent-light)">
+                    <circle cx="220" cy="32" r="5"/>
+                    <line x1="224.5" y1="29" x2="224.5" y2="50" stroke="var(--accent-light)" stroke-width="1.8"/>
+                </g>
+                <g class="note" fill="var(--accent-color)">
+                    <circle cx="270" cy="50" r="5"/>
+                    <line x1="274.5" y1="47" x2="274.5" y2="20" stroke="var(--accent-color)" stroke-width="1.8"/>
+                </g>
+            </svg>
 
             <div class="lang-ja">
                 <div class="coming-soon-eyebrow">Media &amp; Gallery</div>

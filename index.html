@@ -43,12 +43,16 @@
 
     <style>
         :root {
-            --bg-color: #081420;        /* 深い紺 */
-            --text-color: #e6edf5;
-            --accent-color: #5fb4ff;    /* スカイブルー（メインアクセント） */
-            --accent-color-deep: #1e6fd9; /* 深めの青（ホバー等） */
+            --bg-color: #f5f9ff;          /* ほぼ白、わずかに青み */
+            --bg-color-deep: #ffffff;
+            --text-color: #14253f;        /* ダークネイビー */
+            --accent-color: #1c5fc4;      /* メインブルー */
+            --accent-color-deep: #0d3d8a; /* 深いブルー（ホバー等） */
+            --accent-light: #6fa8f5;      /* ライトブルー */
             --accent-white: #ffffff;
-            --card-bg: #0f1e30;
+            --card-bg: #ffffff;
+            --card-border: rgba(28, 95, 196, 0.14);
+            --staff-line: rgba(28, 95, 196, 0.08);
         }
 
         * { box-sizing: border-box; }
@@ -65,6 +69,44 @@
 
         a { color: inherit; }
 
+        /* 五線譜風の背景装飾（ページ全体に薄く敷く） */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            background-image:
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent 0,
+                    transparent 119px,
+                    var(--staff-line) 119px,
+                    var(--staff-line) 120px,
+                    transparent 120px,
+                    transparent 129px,
+                    var(--staff-line) 129px,
+                    var(--staff-line) 130px,
+                    transparent 130px,
+                    transparent 139px,
+                    var(--staff-line) 139px,
+                    var(--staff-line) 140px,
+                    transparent 140px,
+                    transparent 149px,
+                    var(--staff-line) 149px,
+                    var(--staff-line) 150px,
+                    transparent 150px,
+                    transparent 159px,
+                    var(--staff-line) 159px,
+                    var(--staff-line) 160px,
+                    transparent 160px,
+                    transparent 640px
+                );
+        }
+
         /* 背景の装飾音符 */
         .bubble-notes {
             position: fixed;
@@ -74,7 +116,8 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.12;
+            opacity: 0.5;
+            color: var(--accent-light);
         }
 
         /* ヘッダー */
@@ -83,10 +126,10 @@
             justify-content: space-between;
             align-items: center;
             padding: 30px 10%;
-            border-bottom: 1px solid rgba(95, 180, 255, 0.2);
+            border-bottom: 1px solid var(--card-border);
             position: sticky;
             top: 0;
-            background: rgba(8, 20, 32, 0.85);
+            background: rgba(245, 249, 255, 0.88);
             backdrop-filter: blur(8px);
             z-index: 10;
             flex-wrap: wrap;
@@ -152,8 +195,8 @@
             letter-spacing: 6px;
             margin-bottom: 20px;
             font-weight: 600;
-            color: #fff;
-            text-shadow: 0 0 24px rgba(95, 180, 255, 0.45);
+            color: var(--accent-color-deep);
+            text-shadow: 0 4px 20px rgba(28, 95, 196, 0.15);
         }
 
         .hero p {
@@ -162,10 +205,32 @@
             opacity: 0.85;
         }
 
-        .hero-icon {
-            margin-top: 20px;
-            animation: bounce 3s infinite ease-in-out;
-            color: var(--accent-color);
+        .hero-staff {
+            display: block;
+            width: 100%;
+            max-width: 560px;
+            margin: 36px auto 0;
+            height: auto;
+        }
+
+        .hero-staff g[fill] circle,
+        .hero-staff g[fill] line {
+            animation: notePulse 3.6s ease-in-out infinite;
+        }
+        .hero-staff g[fill]:nth-of-type(2) circle,
+        .hero-staff g[fill]:nth-of-type(2) line { animation-delay: 0.3s; }
+        .hero-staff g[fill]:nth-of-type(3) circle,
+        .hero-staff g[fill]:nth-of-type(3) line { animation-delay: 0.6s; }
+        .hero-staff g[fill]:nth-of-type(4) circle,
+        .hero-staff g[fill]:nth-of-type(4) line { animation-delay: 0.9s; }
+        .hero-staff g[fill]:nth-of-type(5) circle,
+        .hero-staff g[fill]:nth-of-type(5) line { animation-delay: 1.2s; }
+        .hero-staff g[fill]:nth-of-type(6) circle,
+        .hero-staff g[fill]:nth-of-type(6) line { animation-delay: 1.5s; }
+
+        @keyframes notePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.55; }
         }
 
         /* コンテンツエリア */
@@ -175,13 +240,25 @@
         h2 {
             font-family: 'Cinzel', serif;
             font-size: 2rem;
-            border-bottom: 1px solid var(--accent-color);
+            color: var(--accent-color-deep);
+            border-bottom: 2px solid var(--card-border);
             padding-bottom: 10px;
             margin-bottom: 40px;
             letter-spacing: 2px;
             display: flex;
             align-items: center;
             gap: 12px;
+            position: relative;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 64px;
+            height: 2px;
+            background: var(--accent-color);
         }
 
         /* 特徴リストのデザイン */
@@ -190,8 +267,8 @@
             border-radius: 12px;
             padding: 30px;
             margin-top: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 30px rgba(28, 95, 196, 0.08);
         }
 
         .feature-item {
@@ -218,7 +295,7 @@
             position: absolute;
             left: 0;
             top: 4px;
-            color: var(--accent-white);
+            color: var(--accent-light);
         }
 
         /* サークル情報テーブル */
@@ -230,7 +307,7 @@
             background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(95, 180, 255, 0.12);
+            border: 1px solid var(--card-border);
         }
 
         .info-table td { padding: 15px 20px; }
@@ -243,8 +320,8 @@
             background: var(--card-bg);
             border-radius: 16px;
             padding: 40px;
-            border: 1px solid rgba(95, 180, 255, 0.15);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 15px 35px rgba(28, 95, 196, 0.1);
             display: flex;
             gap: 35px;
             align-items: center;
@@ -258,7 +335,7 @@
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid var(--accent-color);
-            box-shadow: 0 0 25px rgba(95, 180, 255, 0.3);
+            box-shadow: 0 0 0 6px rgba(28, 95, 196, 0.08);
         }
 
         .contact-photo img {
@@ -281,7 +358,7 @@
         .contact-name {
             font-family: 'Cinzel', serif;
             font-size: 1.8rem;
-            color: #fff;
+            color: var(--accent-color-deep);
             margin-bottom: 14px;
             letter-spacing: 2px;
         }
@@ -314,17 +391,17 @@
 
         .contact-link:hover {
             background: var(--accent-color);
-            color: var(--bg-color);
+            color: var(--accent-white);
         }
 
         /* 応募セクション＆応募ボタン */
         .join-box {
             text-align: center;
             background-color: var(--card-bg);
-            border: 1px solid rgba(95, 180, 255, 0.2);
+            border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 50px 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(28, 95, 196, 0.1);
         }
 
         .join-box p {
@@ -354,18 +431,13 @@
 
         .apply-btn:hover {
             background-color: var(--accent-color);
-            color: var(--bg-color);
-            box-shadow: 0 0 20px rgba(95, 180, 255, 0.45);
+            color: var(--accent-white);
+            box-shadow: 0 8px 24px rgba(28, 95, 196, 0.25);
             transform: translateY(-2px);
         }
 
-        footer { text-align: center; padding: 40px 20px; font-size: 0.8rem; opacity: 0.5; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        footer { text-align: center; padding: 40px 20px; font-size: 0.8rem; opacity: 0.6; border-top: 1px solid var(--card-border); }
         .lang-en { display: none; }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
 
         @media (max-width: 600px) {
             header { padding: 20px 6%; }
@@ -376,18 +448,41 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .hero-icon { animation: none; }
+            .hero-staff g[fill] circle,
+            .hero-staff g[fill] line {
+                animation: none;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- 背景の装飾音符 -->
+    <!-- 背景の装飾：五線譜と音符 -->
     <svg class="bubble-notes" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M10,20 Q13,15 15,20 T20,20" fill="none" stroke="white" stroke-width="0.2"/>
-        <circle cx="10" cy="80" r="1" fill="white"/>
-        <circle cx="85" cy="20" r="1.5" fill="white"/>
-        <circle cx="90" cy="60" r="0.8" fill="white"/>
+        <!-- 右上の小さな五線譜とト音記号風カーブ -->
+        <g transform="translate(78,6) scale(0.9)" opacity="0.55">
+            <line x1="0" y1="0" x2="20" y2="0" stroke="currentColor" stroke-width="0.25"/>
+            <line x1="0" y1="1.6" x2="20" y2="1.6" stroke="currentColor" stroke-width="0.25"/>
+            <line x1="0" y1="3.2" x2="20" y2="3.2" stroke="currentColor" stroke-width="0.25"/>
+            <line x1="0" y1="4.8" x2="20" y2="4.8" stroke="currentColor" stroke-width="0.25"/>
+            <line x1="0" y1="6.4" x2="20" y2="6.4" stroke="currentColor" stroke-width="0.25"/>
+            <circle cx="6" cy="4.8" r="1" fill="currentColor"/>
+            <line x1="6.9" y1="4.8" x2="6.9" y2="0.5" stroke="currentColor" stroke-width="0.25"/>
+            <circle cx="12" cy="1.6" r="1" fill="currentColor"/>
+            <line x1="12.9" y1="1.6" x2="12.9" y2="-2.7" stroke="currentColor" stroke-width="0.25"/>
+        </g>
+        <!-- 左下の音符クラスター -->
+        <g transform="translate(5,72)" opacity="0.5">
+            <circle cx="0" cy="8" r="1.3" fill="currentColor"/>
+            <line x1="1.2" y1="8" x2="1.2" y2="0" stroke="currentColor" stroke-width="0.3"/>
+            <circle cx="6" cy="10" r="1" fill="currentColor"/>
+            <line x1="6.9" y1="10" x2="6.9" y2="3" stroke="currentColor" stroke-width="0.25"/>
+            <path d="M1.2,0 Q4,-0.5 6.9,3" fill="none" stroke="currentColor" stroke-width="0.25"/>
+        </g>
+        <!-- 散らばる小さな音符 -->
+        <circle cx="90" cy="55" r="0.8" fill="currentColor" opacity="0.4"/>
+        <circle cx="93" cy="30" r="0.6" fill="currentColor" opacity="0.35"/>
+        <circle cx="3" cy="35" r="0.7" fill="currentColor" opacity="0.4"/>
     </svg>
 
     <header>
@@ -418,9 +513,47 @@
         <p class="lang-ja">重なり合う声、洗練された響きを求めて。</p>
         <p class="lang-en">Seeking synchronized voices and sophisticated harmonies.</p>
 
-        <div class="hero-icon">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
-        </div>
+        <!-- シグネチャービジュアル：五線譜の上で声部が重なり合い、ハーモニーになる -->
+        <svg class="hero-staff" viewBox="0 0 600 110" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <!-- 五線譜 -->
+            <g stroke="var(--accent-light)" stroke-width="1.4" opacity="0.55">
+                <line x1="20" y1="20" x2="580" y2="20"/>
+                <line x1="20" y1="35" x2="580" y2="35"/>
+                <line x1="20" y1="50" x2="580" y2="50"/>
+                <line x1="20" y1="65" x2="580" y2="65"/>
+                <line x1="20" y1="80" x2="580" y2="80"/>
+            </g>
+            <!-- ト音記号風シンプルマーク -->
+            <path d="M48,80 C30,80 30,55 48,52 C64,49 64,28 48,25 C36,22 34,38 44,40" fill="none" stroke="var(--accent-color-deep)" stroke-width="2.6" stroke-linecap="round"/>
+            <!-- 重なり合う音符（ハーモニーを象徴：複数の声部が異なる高さで連なる） -->
+            <g fill="var(--accent-color)">
+                <circle cx="140" cy="65" r="6"/>
+                <line x1="145.5" y1="62" x2="145.5" y2="28" stroke="var(--accent-color)" stroke-width="2.2"/>
+            </g>
+            <g fill="var(--accent-color-deep)">
+                <circle cx="210" cy="50" r="6"/>
+                <line x1="215.5" y1="47" x2="215.5" y2="14" stroke="var(--accent-color-deep)" stroke-width="2.2"/>
+            </g>
+            <g fill="var(--accent-light)">
+                <circle cx="280" cy="35" r="6"/>
+                <line x1="285.5" y1="32" x2="285.5" y2="58" stroke="var(--accent-light)" stroke-width="2.2"/>
+            </g>
+            <g fill="var(--accent-color)">
+                <circle cx="350" cy="58" r="6"/>
+                <line x1="355.5" y1="55" x2="355.5" y2="22" stroke="var(--accent-color)" stroke-width="2.2"/>
+            </g>
+            <!-- 声部をつなぐスラー（重なり合う声を表現） -->
+            <path d="M146,28 Q210,5 285,32" fill="none" stroke="var(--accent-color-deep)" stroke-width="1.4" opacity="0.5" stroke-linecap="round"/>
+            <g fill="var(--accent-color-deep)">
+                <circle cx="430" cy="42" r="6"/>
+                <line x1="435.5" y1="39" x2="435.5" y2="16" stroke="var(--accent-color-deep)" stroke-width="2.2"/>
+            </g>
+            <g fill="var(--accent-color)">
+                <circle cx="500" cy="65" r="6"/>
+                <line x1="505.5" y1="62" x2="505.5" y2="30" stroke="var(--accent-color)" stroke-width="2.2"/>
+            </g>
+            <path d="M356,22 Q430,0 506,30" fill="none" stroke="var(--accent-light)" stroke-width="1.4" opacity="0.5" stroke-linecap="round"/>
+        </svg>
     </div>
 
     <div class="container">
@@ -437,7 +570,7 @@
                 <p>Ulyssesでは主に固定のバンド形式（3〜4人）で活動しており、3ヶ月に1度（年4回）、各バンドが集まってミニライブ（発表会）を行っています。まったりと、でも素敵なハーモニーを追求して楽しんでいます♪</p>
 
                 <div class="feature-box">
-                    <h3 style="margin-top:0; font-size:1.2rem; color:#fff; letter-spacing:1px; display:flex; align-items:center; gap:8px;">
+                    <h3 style="margin-top:0; font-size:1.2rem; color:var(--accent-color-deep); letter-spacing:1px; display:flex; align-items:center; gap:8px;">
                         ⭐︎ Ulyssesの特徴
                     </h3>
 
@@ -471,7 +604,7 @@
                 <p>Welcome to the a cappella circle "Ulysses," operating mainly in Tokyo and Yokohama.</p>
                 <p>Ulysses mainly operates in fixed band formats (3-4 people), and once every three months (4 times a year), each band gathers for a mini live performance. We enjoy pursuing beautiful harmonies in a relaxed atmosphere.</p>
                 <div class="feature-box">
-                    <h3 style="margin-top:0; font-size:1.2rem; color:#fff; letter-spacing:1px;">⭐︎ Features of Ulysses</h3>
+                    <h3 style="margin-top:0; font-size:1.2rem; color:var(--accent-color-deep); letter-spacing:1px;">⭐︎ Features of Ulysses</h3>
                     <div class="feature-item">
                         <div class="feature-item-title">Beginner-Friendly Environment</div>
                         <div class="feature-item-desc">A comfortable space where even complete beginners can feel right at home.</div>
