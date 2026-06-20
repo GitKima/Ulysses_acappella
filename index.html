@@ -49,6 +49,7 @@
             --accent-color: #1c5fc4;      /* メインブルー */
             --accent-color-deep: #0d3d8a; /* 深いブルー（ホバー等） */
             --accent-light: #6fa8f5;      /* ライトブルー */
+            --accent-glow: #9fc6ff;       /* グロー用の淡い青 */
             --accent-white: #ffffff;
             --card-bg: #ffffff;
             --card-border: rgba(28, 95, 196, 0.14);
@@ -125,27 +126,33 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 10%;
+            padding: 26px 10%;
             border-bottom: 1px solid var(--card-border);
             position: sticky;
             top: 0;
-            background: rgba(245, 249, 255, 0.88);
-            backdrop-filter: blur(8px);
+            background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(245,249,255,0.86));
+            backdrop-filter: blur(10px);
             z-index: 10;
             flex-wrap: wrap;
             gap: 15px;
+            box-shadow: 0 1px 0 rgba(28, 95, 196, 0.04), 0 8px 24px rgba(28, 95, 196, 0.04);
         }
 
         .logo {
             font-family: 'Cinzel', serif;
             font-size: 1.8rem;
             letter-spacing: 3px;
-            color: var(--accent-color);
+            background: linear-gradient(120deg, var(--accent-color-deep), var(--accent-color) 60%, var(--accent-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             display: flex;
             align-items: center;
             gap: 10px;
             text-decoration: none;
         }
+
+        .logo svg { color: var(--accent-color); }
 
         nav.main-nav {
             display: flex;
@@ -185,7 +192,7 @@
         /* メインビジュアル */
         .hero {
             text-align: center;
-            padding: 120px 20px;
+            padding: 110px 20px 40px;
             position: relative;
         }
 
@@ -195,8 +202,11 @@
             letter-spacing: 6px;
             margin-bottom: 20px;
             font-weight: 600;
-            color: var(--accent-color-deep);
-            text-shadow: 0 4px 20px rgba(28, 95, 196, 0.15);
+            background: linear-gradient(120deg, var(--accent-color-deep), var(--accent-color) 50%, var(--accent-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 4px 30px rgba(28, 95, 196, 0.18);
         }
 
         .hero p {
@@ -210,6 +220,14 @@
             width: 100%;
             max-width: 560px;
             margin: 36px auto 0;
+            height: auto;
+        }
+
+        .hero-singers {
+            display: block;
+            width: 100%;
+            max-width: 480px;
+            margin: 10px auto 0;
             height: auto;
         }
 
@@ -263,18 +281,30 @@
 
         /* 特徴リストのデザイン */
         .feature-box {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 30px;
+            background: linear-gradient(165deg, #ffffff, #f7faff);
+            border-radius: 14px;
+            padding: 32px;
             margin-top: 30px;
             border: 1px solid var(--card-border);
-            box-shadow: 0 10px 30px rgba(28, 95, 196, 0.08);
+            box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset, 0 16px 40px rgba(28, 95, 196, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color-deep), var(--accent-color), var(--accent-light));
         }
 
         .feature-item {
             margin-bottom: 30px;
             position: relative;
-            padding-left: 40px;
+            padding-left: 44px;
         }
 
         .feature-item:last-child { margin-bottom: 0; }
@@ -294,9 +324,18 @@
         .feature-icon {
             position: absolute;
             left: 0;
-            top: 4px;
-            color: var(--accent-light);
+            top: 0;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(28,95,196,0.1), rgba(111,168,245,0.16));
+            color: var(--accent-color-deep);
         }
+
+        .feature-icon svg { width: 16px; height: 16px; }
 
         /* サークル情報テーブル */
         .info-table {
@@ -304,38 +343,51 @@
             margin-top: 40px;
             border-collapse: collapse;
             font-size: 0.9rem;
-            background: var(--card-bg);
-            border-radius: 12px;
+            background: linear-gradient(165deg, #ffffff, #f7faff);
+            border-radius: 14px;
             overflow: hidden;
             border: 1px solid var(--card-border);
+            box-shadow: 0 12px 30px rgba(28, 95, 196, 0.07);
         }
 
-        .info-table td { padding: 15px 20px; }
-        .info-table tr { border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .info-table td { padding: 16px 22px; }
+        .info-table tr { border-bottom: 1px solid rgba(28, 95, 196, 0.06); }
         .info-table tr:last-child { border-bottom: none; }
-        .info-table-title { color: var(--accent-color); font-weight: bold; width: 25%; }
+        .info-table-title { color: var(--accent-color-deep); font-weight: bold; width: 25%; }
 
         /* Contact / 代表セクション */
         .contact-box {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 40px;
+            background: linear-gradient(165deg, #ffffff, #f4f8ff);
+            border-radius: 18px;
+            padding: 44px;
             border: 1px solid var(--card-border);
-            box-shadow: 0 15px 35px rgba(28, 95, 196, 0.1);
+            box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 20px 48px rgba(28, 95, 196, 0.12);
             display: flex;
-            gap: 35px;
+            gap: 38px;
             align-items: center;
             flex-wrap: wrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color-deep), var(--accent-color), var(--accent-light));
         }
 
         .contact-photo {
             flex-shrink: 0;
-            width: 160px;
-            height: 160px;
+            width: 168px;
+            height: 168px;
             border-radius: 50%;
             overflow: hidden;
-            border: 3px solid var(--accent-color);
-            box-shadow: 0 0 0 6px rgba(28, 95, 196, 0.08);
+            border: 3px solid var(--accent-white);
+            box-shadow: 0 0 0 4px var(--accent-color), 0 0 0 9px rgba(28, 95, 196, 0.1), 0 14px 30px rgba(28, 95, 196, 0.18);
         }
 
         .contact-photo img {
@@ -366,73 +418,38 @@
         .contact-desc {
             font-size: 0.95rem;
             opacity: 0.85;
-            margin-bottom: 18px;
+            margin-bottom: 22px;
         }
 
-        .contact-links {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
+        .contact-note {
+            font-size: 0.8rem;
+            opacity: 0.7;
         }
 
-        .contact-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border: 1px solid var(--accent-color);
-            border-radius: 30px;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-decoration: none;
-            color: var(--accent-color);
-            transition: all 0.25s ease;
-        }
-
-        .contact-link:hover {
-            background: var(--accent-color);
-            color: var(--accent-white);
-        }
-
-        /* 応募セクション＆応募ボタン */
-        .join-box {
-            text-align: center;
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 50px 40px;
-            box-shadow: 0 15px 35px rgba(28, 95, 196, 0.1);
-        }
-
-        .join-box p {
-            font-size: 1.05rem;
-            margin-bottom: 30px;
-        }
-
+        /* 応募・お問い合わせボタン */
         .apply-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            width: 80%;
-            max-width: 400px;
-            padding: 18px;
-            background: transparent;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            font-size: 1.2rem;
-            letter-spacing: 2px;
+            width: auto;
+            max-width: 100%;
+            padding: 16px 36px;
+            background: linear-gradient(120deg, var(--accent-color-deep), var(--accent-color));
+            border: none;
+            color: var(--accent-white);
+            font-size: 1.05rem;
+            letter-spacing: 1.5px;
             font-weight: 600;
             border-radius: 50px;
             text-decoration: none;
             transition: all 0.3s ease;
             cursor: pointer;
+            box-shadow: 0 10px 26px rgba(28, 95, 196, 0.28);
         }
 
         .apply-btn:hover {
-            background-color: var(--accent-color);
-            color: var(--accent-white);
-            box-shadow: 0 8px 24px rgba(28, 95, 196, 0.25);
+            box-shadow: 0 14px 34px rgba(28, 95, 196, 0.38);
             transform: translateY(-2px);
         }
 
@@ -442,9 +459,10 @@
         @media (max-width: 600px) {
             header { padding: 20px 6%; }
             nav.main-nav { gap: 16px; }
+            .hero { padding: 90px 16px 24px; }
             .hero h1 { font-size: 2.6rem; letter-spacing: 4px; }
-            .contact-box { flex-direction: column; text-align: center; }
-            .contact-links { justify-content: center; }
+            .hero-singers { max-width: 320px; }
+            .contact-box { flex-direction: column; text-align: center; padding: 32px 24px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -493,12 +511,10 @@
         <nav class="main-nav">
             <a href="#about" class="lang-ja">ABOUT</a>
             <a href="#about" class="lang-en">ABOUT</a>
-            <a href="media.html" class="lang-ja">MEDIA</a>
+            <a href="media.html" class="lang-ja">活動風景</a>
             <a href="media.html" class="lang-en">MEDIA</a>
             <a href="#contact" class="lang-ja">CONTACT</a>
             <a href="#contact" class="lang-en">CONTACT</a>
-            <a href="#join" class="lang-ja">JOIN US</a>
-            <a href="#join" class="lang-en">JOIN US</a>
         </nav>
         <div class="lang-switcher">
             <select id="langSelect" onchange="switchLanguage()">
@@ -553,6 +569,48 @@
                 <line x1="505.5" y1="62" x2="505.5" y2="30" stroke="var(--accent-color)" stroke-width="2.2"/>
             </g>
             <path d="M356,22 Q430,0 506,30" fill="none" stroke="var(--accent-light)" stroke-width="1.4" opacity="0.5" stroke-linecap="round"/>
+        </svg>
+
+        <!-- シグネチャービジュアル：歌うグループのシルエット（線画・スタイリッシュ） -->
+        <svg class="hero-singers" viewBox="0 0 600 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <!-- 後方左：マイクを持ち少し上を向く -->
+            <g transform="translate(70,40)" stroke="var(--accent-color-deep)" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.55">
+                <circle cx="30" cy="22" r="16"/>
+                <path d="M8,120 C8,80 14,58 30,58 C46,58 52,80 52,120"/>
+                <path d="M30,58 L30,30"/>
+                <ellipse cx="30" cy="27" rx="3.5" ry="5"/>
+            </g>
+            <!-- 後方右：肩を組むように少し傾く -->
+            <g transform="translate(470,42)" stroke="var(--accent-color-deep)" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.55">
+                <circle cx="32" cy="20" r="16"/>
+                <path d="M10,118 C8,78 16,56 32,56 C48,56 54,80 56,118"/>
+            </g>
+            <!-- 中央左：手を口元のマイク代わりに添えて歌う -->
+            <g transform="translate(160,20)" stroke="var(--accent-color)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="34" cy="24" r="18"/>
+                <path d="M8,138 C8,92 16,68 34,68 C52,68 60,92 60,138"/>
+                <path d="M34,68 L34,38"/>
+                <path d="M20,40 Q34,30 46,42" stroke-width="2"/>
+                <ellipse cx="34" cy="29" rx="3.5" ry="5.5"/>
+            </g>
+            <!-- 中央右：腕を大きく広げてハーモニーを楽しむ -->
+            <g transform="translate(330,18)" stroke="var(--accent-color)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="40" cy="24" r="18"/>
+                <path d="M12,140 C10,94 20,70 40,70 C60,70 68,96 70,140"/>
+                <path d="M40,70 C20,78 6,68 -2,52" stroke-width="2.2"/>
+                <path d="M40,70 C62,76 78,64 86,46" stroke-width="2.2"/>
+                <ellipse cx="40" cy="29" rx="3.8" ry="5.5"/>
+            </g>
+            <!-- 中央：一番前、両手を上げてリードする -->
+            <g transform="translate(248,4)" stroke="var(--accent-color-deep)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="40" cy="26" r="20"/>
+                <path d="M10,150 C8,98 18,72 40,72 C62,72 72,100 74,150"/>
+                <path d="M40,72 C22,62 12,40 14,18" stroke-width="2.4"/>
+                <path d="M40,72 C58,62 68,40 66,18" stroke-width="2.4"/>
+                <ellipse cx="40" cy="31" rx="4" ry="6"/>
+            </g>
+            <!-- 足元の柔らかい接地ライン -->
+            <ellipse cx="300" cy="172" rx="260" ry="6" fill="var(--accent-light)" opacity="0.12"/>
         </svg>
     </div>
 
@@ -625,7 +683,7 @@
             </div>
         </section>
 
-        <!-- CONTACT（代表者紹介） -->
+        <!-- CONTACT（代表者紹介＋メンバー登録） -->
         <section id="contact">
             <h2>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -640,13 +698,11 @@
                     <div class="contact-info">
                         <div class="contact-role">代表</div>
                         <div class="contact-name">REN</div>
-                        <div class="contact-desc">サークルに関するご質問・お問い合わせはお気軽にどうぞ。見学も大歓迎です！</div>
-                        <div class="contact-links">
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLScTwZ8Q_oXY9HvjV0AUa9nykeMoMIozhNQxTXpaBy0hAem1ww/viewform" target="_blank" class="contact-link">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                フォームで問い合わせる
-                            </a>
-                        </div>
+                        <div class="contact-desc">サークルに関するご質問・お問い合わせ、メンバー登録は、下記のボタンよりGoogleフォームを開いてご記入ください。見学も大歓迎です！<br><span class="contact-note">※送信後はこのタブに戻ってきていただけます。</span></div>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScTwZ8Q_oXY9HvjV0AUa9nykeMoMIozhNQxTXpaBy0hAem1ww/viewform" target="_blank" class="apply-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                            メンバー応募・お問い合わせフォーム
+                        </a>
                     </div>
                 </div>
             </div>
@@ -659,39 +715,11 @@
                     <div class="contact-info">
                         <div class="contact-role">Leader</div>
                         <div class="contact-name">REN</div>
-                        <div class="contact-desc">Feel free to reach out with any questions about the circle. Visitors are always welcome!</div>
-                        <div class="contact-links">
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLScTwZ8Q_oXY9HvjV0AUa9nykeMoMIozhNQxTXpaBy0hAem1ww/viewform" target="_blank" class="contact-link">
-                                Contact via Form
-                            </a>
-                        </div>
+                        <div class="contact-desc">For questions or to register as a member, please fill out the Google Form below. Visitors are always welcome!</div>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScTwZ8Q_oXY9HvjV0AUa9nykeMoMIozhNQxTXpaBy0hAem1ww/viewform" target="_blank" class="apply-btn">
+                            Member Registration / Contact Form
+                        </a>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 応募セクション（ボタンだけ！） -->
-        <section id="join">
-            <h2>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
-                MEMBER REGISTRATION
-            </h2>
-
-            <div class="join-box">
-                <div class="lang-ja">
-                    <p>メンバー登録・お問い合わせは、下記のボタンよりGoogleフォームを開いてご記入ください。<br>※送信後はこのタブに戻ってきていただけます。</p>
-                    <!-- target="_blank" を入れることで、今のHPを残したまま新しいタブでフォームを開きます -->
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScTwZ8Q_oXY9HvjV0AUa9nykeMoMIozhNQxTXpaBy0hAem1ww/viewform" target="_blank" class="apply-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-                        メンバー応募フォームを開く
-                    </a>
-                </div>
-
-                <div class="lang-en">
-                    <p>To register, please fill out the Google Form via the link below.</p>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScTwZ8Q_oXY9HvjV0AUa9nykeMoMIozhNQxTXpaBy0hAem1ww/viewform" target="_blank" class="apply-btn">
-                        Open Google Form
-                    </a>
                 </div>
             </div>
         </section>

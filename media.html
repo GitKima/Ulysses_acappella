@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEDIA（Coming Soon）｜Ulysses（ユリシーズ）｜東京・横浜のアカペラサークル</title>
+    <title>活動風景（Coming Soon）｜Ulysses（ユリシーズ）｜東京・横浜のアカペラサークル</title>
 
-    <meta name="description" content="Ulysses（ユリシーズ）のメディアページ。ライブ動画やフォトギャラリーを今後公開予定です。東京・横浜で活動するアカペラサークル、初心者歓迎・メンバー募集中。">
-    <meta name="keywords" content="アカペラ,アカペラサークル,東京,横浜,Ulysses,ユリシーズ,動画,ライブ,フォトギャラリー">
+    <meta name="description" content="Ulysses（ユリシーズ）の活動風景ページ。ライブ動画やフォトギャラリーを今後公開予定です。東京・横浜で活動するアカペラサークル、初心者歓迎・メンバー募集中。">
+    <meta name="keywords" content="アカペラ,アカペラサークル,東京,横浜,Ulysses,ユリシーズ,動画,ライブ,フォトギャラリー,活動風景">
     <link rel="canonical" href="https://ulysses-acappella.example.com/media.html">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="MEDIA（Coming Soon）｜Ulysses（ユリシーズ）">
+    <meta property="og:title" content="活動風景（Coming Soon）｜Ulysses（ユリシーズ）">
     <meta property="og:description" content="ライブ動画やフォトギャラリーを今後公開予定です。東京・横浜のアカペラサークルUlysses。">
     <meta property="og:url" content="https://ulysses-acappella.example.com/media.html">
     <meta property="og:locale" content="ja_JP">
@@ -89,27 +89,33 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 10%;
+            padding: 26px 10%;
             border-bottom: 1px solid var(--card-border);
             position: sticky;
             top: 0;
-            background: rgba(245, 249, 255, 0.88);
-            backdrop-filter: blur(8px);
+            background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(245,249,255,0.86));
+            backdrop-filter: blur(10px);
             z-index: 10;
             flex-wrap: wrap;
             gap: 15px;
+            box-shadow: 0 1px 0 rgba(28, 95, 196, 0.04), 0 8px 24px rgba(28, 95, 196, 0.04);
         }
 
         .logo {
             font-family: 'Cinzel', serif;
             font-size: 1.8rem;
             letter-spacing: 3px;
-            color: var(--accent-color);
+            background: linear-gradient(120deg, var(--accent-color-deep), var(--accent-color) 60%, var(--accent-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             display: flex;
             align-items: center;
             gap: 10px;
             text-decoration: none;
         }
+
+        .logo svg { color: var(--accent-color); }
 
         nav.main-nav {
             display: flex;
@@ -202,9 +208,12 @@
             font-family: 'Cinzel', serif;
             font-size: 3rem;
             letter-spacing: 5px;
-            color: var(--accent-color-deep);
+            background: linear-gradient(120deg, var(--accent-color-deep), var(--accent-color) 50%, var(--accent-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 24px;
-            text-shadow: 0 4px 20px rgba(28, 95, 196, 0.15);
+            text-shadow: 0 4px 30px rgba(28, 95, 196, 0.18);
         }
 
         .coming-soon-desc {
@@ -217,20 +226,21 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 14px 32px;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
+            padding: 14px 36px;
+            background: linear-gradient(120deg, var(--accent-color-deep), var(--accent-color));
+            border: none;
+            color: var(--accent-white);
             border-radius: 50px;
             text-decoration: none;
             font-size: 1rem;
             letter-spacing: 1px;
             transition: all 0.3s ease;
+            box-shadow: 0 10px 26px rgba(28, 95, 196, 0.28);
         }
 
         .back-link:hover {
-            background-color: var(--accent-color);
-            color: var(--accent-white);
-            box-shadow: 0 8px 24px rgba(28, 95, 196, 0.25);
+            box-shadow: 0 14px 34px rgba(28, 95, 196, 0.38);
+            transform: translateY(-2px);
         }
 
         footer { text-align: center; padding: 40px 20px; font-size: 0.8rem; opacity: 0.6; border-top: 1px solid var(--card-border); }
@@ -259,12 +269,10 @@
         <nav class="main-nav">
             <a href="index.html#about" class="lang-ja-nav">ABOUT</a>
             <a href="index.html#about" class="lang-en-nav" style="display:none;">ABOUT</a>
-            <a href="media.html" class="active lang-ja-nav">MEDIA</a>
+            <a href="media.html" class="active lang-ja-nav">活動風景</a>
             <a href="media.html" class="active lang-en-nav" style="display:none;">MEDIA</a>
             <a href="index.html#contact" class="lang-ja-nav">CONTACT</a>
             <a href="index.html#contact" class="lang-en-nav" style="display:none;">CONTACT</a>
-            <a href="index.html#join" class="lang-ja-nav">JOIN US</a>
-            <a href="index.html#join" class="lang-en-nav" style="display:none;">JOIN US</a>
         </nav>
         <div class="lang-switcher">
             <select id="langSelect" onchange="switchLanguage()">
